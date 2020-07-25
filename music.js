@@ -19,7 +19,7 @@ const cooldowns = new Collection();
  */
 client.on("ready", () => {
   console.log(`${client.user.username} is ready to play songs!`);
-  client.user.setActivity(`test, -`);
+  client.user.setActivity(`മൂസിക്ക്`);
 });
 client.on("warn", (info) => console.log(info));
 client.on("error", console.error);
@@ -40,7 +40,7 @@ client.on("message", async (message) => {
   if (!message.guild) return;
 
   if (message.content.startsWith(PREFIX)) {
-    //if(message.channel.id != '706032518696009830') return message.reply("You Can Only Execute This Command On <#706032518696009830>");
+    if(message.channel.id != '714509602535899178') return message.reply("Music commands only accept on <#714509602535899178>");
     const args = message.content.slice(PREFIX.length).trim().split(/ +/);
     const commandName = args.shift().toLowerCase();
 
