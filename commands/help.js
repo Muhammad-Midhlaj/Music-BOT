@@ -1,18 +1,31 @@
 const { MessageEmbed } = require("discord.js");
-const exampleEmbed = new Discord.MessageEmbed()
-.setColor('#0099ff')
-.setTitle('MGC MUSIC commands:')
-.addFields(
-  { name: '+play<title|URL|subcommand>', value: 'plays the provided song' },
-  { name: '+playlists', value: 'shows the available playlists' },
-  { name: '+lyrics[song name]', value: 'shows the lyrics to the currently-playing song' },
-  { name: '+nowplaying', value: 'shows the song that is currently playing' },
-  {name: '+search <query>',value:'searches Youtube for a provided query'},
-  {name: '+shuffle',value:'shuffles songs you have added'},
-)
+
 module.exports = {
   name: "help",
   aliases: ["h"],
   description: "Display all commands and descriptions",
-  execute(exampleEmbed) 
-   };
+  execute(message) {
+    let commands = message.client.commands.array();
+    commands.shift()
+    let helpEmbed = new MessageEmbed()
+      .setTitle("MGC MUSIC")
+      .setDescription("List of all commands")
+      .setColor("#F8AA2A");
+
+    commands.forEach((cmd) => {
+      helpEmbed.addField(
+        `**${message.client.prefix}${cmd.name} ${cmd.aliases ? `(${cmd.aliases})` : ""}**`,
+        `${cmd.description}`,
+        true
+      );
+    });
+
+    helpEmbed.setTimestamp();
+
+    return message.channel.send(helpEmbed);
+  
+   //Music-Help Channel ID = 732460163495100428
+  // message.reply("Please see <#732460163495100428> for **Music Bot** commands.");
+  }
+};
+
